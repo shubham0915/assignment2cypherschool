@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cloud Computing Assignment - AWS EC2 Static Website hosted by Shubham" />
+  <title>CloudSpace | AWS EC2 Hosted</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background -->
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">☁️</span>
+        <span class="logo-text">CloudSpace</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tech">Tech Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-badge">
+        <span class="pulse-dot"></span>
+        Live on AWS EC2
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🚀</span> Deployed on AWS EC2 with Elastic IP
+      </div>
+      <h1 class="hero-title">
+        Cloud Computing
+        <span class="gradient-text">Assignment 01</span>
+      </h1>
+      <p class="hero-subtitle">
+        Static website hosted on <strong>AWS EC2</strong> using Apache2 web server,
+        secured with <strong>IAM access control</strong> and served via <strong>Elastic IP</strong>.
+      </p>
+      <div class="hero-buttons">
+        <a href="#about" class="btn btn-primary">Explore →</a>
+        <a href="#tech" class="btn btn-secondary">Tech Stack</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value" id="uptime">99.9%</span>
+          <span class="stat-label">Uptime</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">EC2</span>
+          <span class="stat-label">AWS Instance</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">2</span>
+          <span class="stat-label">IAM Users</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value" id="visitor-count">1</span>
+          <span class="stat-label">Visitors</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="cloud-card">
+        <div class="cloud-card-header">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+          <span>AWS EC2 Console</span>
+        </div>
+        <div class="cloud-card-body">
+          <div class="terminal-line"><span class="prompt">$</span> ssh -i key.pem ec2-user@<span class="highlight" id="ip-display">your-elastic-ip</span></div>
+          <div class="terminal-line"><span class="prompt">$</span> sudo systemctl status apache2</div>
+          <div class="terminal-line success">● apache2.service - active (running)</div>
+          <div class="terminal-line"><span class="prompt">$</span> curl localhost</div>
+          <div class="terminal-line success">&lt;!DOCTYPE html&gt; ...</div>
+          <div class="terminal-line blink">▌</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-tag">About the Project</div>
+      <h2 class="section-title">AWS EC2 + IAM <span class="gradient-text">Setup</span></h2>
+      <div class="cards-grid">
+        <div class="card" data-delay="0">
+          <div class="card-icon">🖥️</div>
+          <h3>EC2 Instance</h3>
+          <p>Launched a t2.micro EC2 instance on AWS running Ubuntu/Amazon Linux 2, configured with a public security group allowing HTTP (port 80) and SSH (port 22) traffic.</p>
+        </div>
+        <div class="card" data-delay="100">
+          <div class="card-icon">🌐</div>
+          <h3>Apache2 Web Server</h3>
+          <p>Installed and configured Apache2 to serve this static website. Files are hosted at <code>/var/www/html/</code> and served over port 80 to the internet.</p>
+        </div>
+        <div class="card" data-delay="200">
+          <div class="card-icon">🔒</div>
+          <h3>Elastic IP</h3>
+          <p>Allocated a static Elastic IP address from AWS and associated it with the EC2 instance to ensure a consistent public IP that doesn't change on restart.</p>
+        </div>
+        <div class="card" data-delay="300">
+          <div class="card-icon">👤</div>
+          <h3>IAM User 1 — No Access</h3>
+          <p>Created an IAM user with <strong>no policies</strong> attached. This user cannot view or interact with any AWS services including EC2 instances.</p>
+        </div>
+        <div class="card" data-delay="400">
+          <div class="card-icon">👥</div>
+          <h3>IAM User 2 — EC2 Access</h3>
+          <p>Created an IAM user with <strong>AmazonEC2ReadOnlyAccess</strong> policy. This user can view and describe EC2 instances, security groups, and related resources.</p>
+        </div>
+        <div class="card" data-delay="500">
+          <div class="card-icon">📋</div>
+          <h3>Assignment Goal</h3>
+          <p>Demonstrate cloud infrastructure skills including compute provisioning, web serving, static IP management, and identity/access management on AWS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section id="tech" class="section section-dark">
+    <div class="container">
+      <div class="section-tag">Technologies Used</div>
+      <h2 class="section-title">Tech <span class="gradient-text">Stack</span></h2>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <div class="tech-logo">AWS</div>
+          <span>Amazon Web Services</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo" style="font-size:2rem;">🖥️</div>
+          <span>EC2 (t2.micro)</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo" style="font-size:2rem;">🔶</div>
+          <span>Apache2 / Nginx</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo" style="font-size:2rem;">🌐</div>
+          <span>Elastic IP</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">IAM</div>
+          <span>IAM Users & Policies</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo" style="font-size:2rem;">🔐</div>
+          <span>Security Groups</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">HTML</div>
+          <span>HTML5</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">CSS</div>
+          <span>CSS3</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">JS</div>
+          <span>JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Diagram Section -->
+  <section id="arch" class="section">
+    <div class="container">
+      <div class="section-tag">Architecture</div>
+      <h2 class="section-title">Cloud <span class="gradient-text">Architecture</span></h2>
+      <div class="arch-diagram">
+        <div class="arch-box client">
+          <div class="arch-icon">💻</div>
+          <div class="arch-label">User Browser</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box internet">
+          <div class="arch-icon">🌍</div>
+          <div class="arch-label">Internet</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box elastic-ip">
+          <div class="arch-icon">🔗</div>
+          <div class="arch-label">Elastic IP</div>
+          <div class="arch-sub">Static Public IP</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box ec2">
+          <div class="arch-icon">🖥️</div>
+          <div class="arch-label">EC2 Instance</div>
+          <div class="arch-sub">Apache2 :80</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box website">
+          <div class="arch-icon">🌐</div>
+          <div class="arch-label">This Website</div>
+          <div class="arch-sub">/var/www/html</div>
+        </div>
+      </div>
+      <div class="iam-section">
+        <h3>IAM Access Control</h3>
+        <div class="iam-grid">
+          <div class="iam-card no-access">
+            <div class="iam-icon">🚫</div>
+            <h4>IAM User 1</h4>
+            <p>No Policies Attached</p>
+            <div class="iam-badge denied">Access Denied</div>
+          </div>
+          <div class="iam-card has-access">
+            <div class="iam-icon">✅</div>
+            <h4>IAM User 2</h4>
+            <p>AmazonEC2ReadOnlyAccess</p>
+            <div class="iam-badge allowed">EC2 View Access</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section section-dark">
+    <div class="container">
+      <div class="section-tag">Developer</div>
+      <h2 class="section-title">Built by <span class="gradient-text">Shubham</span></h2>
+      <div class="contact-card">
+        <div class="contact-info">
+          <h3>Cipher Schools — Cloud Computing</h3>
+          <p>Assignment 01 · Phase 2 · April 2026</p>
+          <div class="contact-links">
+            <a href="https://github.com" class="contact-link" id="github-link">GitHub Repository →</a>
+          </div>
+        </div>
+        <div class="contact-badge">
+          <span class="pulse-dot"></span>
+          Hosted Live on AWS
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Shubham · Cipher Schools · AWS EC2 Assignment · Built with ❤️ and HTML/CSS/JS</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
