@@ -16,7 +16,7 @@
 
 > EC2 instance `i-0ad8080f3cd2ec36f` (assignment2) running in us-east-1 (N. Virginia). Username `shubham` visible in the top-right corner of the AWS Console.
 
-*(Add your EC2 console screenshot here as `screenshots/ec2-console.png`)*
+![EC2 Console Screenshot](screenshots/ec2-console.png)
 
 ---
 
@@ -24,7 +24,7 @@
 
 This user has **no permissions attached**. Every EC2 resource shows **"API Error"** — the user cannot view or interact with any AWS services.
 
-*(Add your User 1 screenshot here as `screenshots/user1-no-access.png`)*
+![User 1 - No Access Screenshot](screenshots/user1-no-access.png)
 
 ---
 
@@ -32,7 +32,7 @@ This user has **no permissions attached**. Every EC2 resource shows **"API Error
 
 This user has **AmazonEC2FullAccess** policy attached. They can view and interact with EC2 instances. Screenshot shows **Instances (running): 1** visible in the EC2 dashboard.
 
-*(Add your User 2 screenshot here as `screenshots/user2-ec2-access.png`)*
+![User 2 - EC2 Access Screenshot](screenshots/user2-ec2-access.png)
 
 ---
 
