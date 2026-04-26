@@ -38,7 +38,7 @@ if (visitorCountEl) {
 const uptimeEl = document.getElementById('uptime');
 if (uptimeEl) {
   // Simulate uptime calculation
-  const startDate = new Date('2026-04-18');
+  const startDate = new Date('2026-04-26');
   const now = new Date();
   const diffMs = now - startDate;
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
