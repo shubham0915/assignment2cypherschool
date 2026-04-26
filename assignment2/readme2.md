@@ -1,7 +1,7 @@
 # Assignment 02: AWS S3 Static Website Hosting with Versioning & Lifecycle Management
 
 **Name:** Shubham  
-**Registration Number:** [YOUR REGISTRATION NUMBER HERE]  
+**Registration Number:** 12310611  
 **Deployed Website Link:** [http://shubham-s3-assignment2-2026.s3-website-us-east-1.amazonaws.com](http://shubham-s3-assignment2-2026.s3-website-us-east-1.amazonaws.com)  
 
 ---
