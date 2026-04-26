@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cloud Computing Assignment - AWS EC2 Static Website hosted by Shubham" />
+  <meta name="description" content="Cloud Computing Assignment - AWS S3 Static Website hosted by Shubham" />
   <title>CloudSpace | AWS S3 Hosted</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,8 +67,8 @@
         </div>
         <div class="stat-divider"></div>
         <div class="stat">
-          <span class="stat-value">2</span>
-          <span class="stat-label">IAM Users</span>
+          <span class="stat-value">v2</span>
+          <span class="stat-label">Versioning</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat">
@@ -83,14 +83,15 @@
           <div class="dot red"></div>
           <div class="dot yellow"></div>
           <div class="dot green"></div>
-          <span>AWS EC2 Console</span>
+          <span>AWS S3 CLI Setup</span>
         </div>
         <div class="cloud-card-body">
-          <div class="terminal-line"><span class="prompt">$</span> ssh -i key.pem ec2-user@<span class="highlight" id="ip-display">your-elastic-ip</span></div>
-          <div class="terminal-line"><span class="prompt">$</span> sudo systemctl status apache2</div>
-          <div class="terminal-line success">● apache2.service - active (running)</div>
-          <div class="terminal-line"><span class="prompt">$</span> curl localhost</div>
-          <div class="terminal-line success">&lt;!DOCTYPE html&gt; ...</div>
+          <div class="terminal-line"><span class="prompt">$</span> aws s3 mb s3://<span class="highlight">your-bucket-name</span></div>
+          <div class="terminal-line success">make_bucket: your-bucket-name</div>
+          <div class="terminal-line"><span class="prompt">$</span> aws s3 website s3://your-bucket-name --index-document index.html</div>
+          <div class="terminal-line"><span class="prompt">$</span> aws s3api put-bucket-versioning --bucket your-bucket-name --versioning-configuration Status=Enabled</div>
+          <div class="terminal-line"><span class="prompt">$</span> aws s3 cp . s3://your-bucket-name/ --recursive</div>
+          <div class="terminal-line success">upload: ./index.html to s3://your-bucket-name/index.html</div>
           <div class="terminal-line blink">▌</div>
         </div>
       </div>
@@ -101,37 +102,27 @@
   <section id="about" class="section">
     <div class="container">
       <div class="section-tag">About the Project</div>
-      <h2 class="section-title">AWS EC2 + IAM <span class="gradient-text">Setup</span></h2>
+      <h2 class="section-title">AWS S3 + Versioning <span class="gradient-text">Setup</span></h2>
       <div class="cards-grid">
         <div class="card" data-delay="0">
-          <div class="card-icon">🖥️</div>
-          <h3>EC2 Instance</h3>
-          <p>Launched a t2.micro EC2 instance on AWS running Ubuntu/Amazon Linux 2, configured with a public security group allowing HTTP (port 80) and SSH (port 22) traffic.</p>
+          <div class="card-icon">🪣</div>
+          <h3>S3 Bucket Creation</h3>
+          <p>Created a globally unique Amazon S3 bucket to store all the static assets (HTML, CSS, JS) required for this website.</p>
         </div>
         <div class="card" data-delay="100">
           <div class="card-icon">🌐</div>
-          <h3>Apache2 Web Server</h3>
-          <p>Installed and configured Apache2 to serve this static website. Files are hosted at <code>/var/www/html/</code> and served over port 80 to the internet.</p>
+          <h3>Static Website Hosting</h3>
+          <p>Enabled the Static Website Hosting feature on the S3 bucket, configuring `index.html` as the default entry point and setting up public bucket policies.</p>
         </div>
         <div class="card" data-delay="200">
-          <div class="card-icon">🔒</div>
-          <h3>Elastic IP</h3>
-          <p>Allocated a static Elastic IP address from AWS and associated it with the EC2 instance to ensure a consistent public IP that doesn't change on restart.</p>
+          <div class="card-icon">⏱️</div>
+          <h3>Bucket Versioning</h3>
+          <p>Enabled S3 Versioning to preserve, retrieve, and restore every version of every object stored in the bucket, protecting against accidental overwrites.</p>
         </div>
         <div class="card" data-delay="300">
-          <div class="card-icon">👤</div>
-          <h3>IAM User 1 — No Access</h3>
-          <p>Created an IAM user with <strong>no policies</strong> attached. This user cannot view or interact with any AWS services including EC2 instances.</p>
-        </div>
-        <div class="card" data-delay="400">
-          <div class="card-icon">👥</div>
-          <h3>IAM User 2 — EC2 Access</h3>
-          <p>Created an IAM user with <strong>AmazonEC2ReadOnlyAccess</strong> policy. This user can view and describe EC2 instances, security groups, and related resources.</p>
-        </div>
-        <div class="card" data-delay="500">
-          <div class="card-icon">📋</div>
-          <h3>Assignment Goal</h3>
-          <p>Demonstrate cloud infrastructure skills including compute provisioning, web serving, static IP management, and identity/access management on AWS.</p>
+          <div class="card-icon">♻️</div>
+          <h3>Lifecycle Rules</h3>
+          <p>Implemented lifecycle management rules to automatically transition or permanently delete noncurrent versions of objects after 30 days to optimize storage costs.</p>
         </div>
       </div>
     </div>
@@ -148,24 +139,24 @@
           <span>Amazon Web Services</span>
         </div>
         <div class="tech-item">
-          <div class="tech-logo" style="font-size:2rem;">🖥️</div>
-          <span>EC2 (t2.micro)</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-logo" style="font-size:2rem;">🔶</div>
-          <span>Apache2 / Nginx</span>
+          <div class="tech-logo" style="font-size:2rem;">🪣</div>
+          <span>Amazon S3</span>
         </div>
         <div class="tech-item">
           <div class="tech-logo" style="font-size:2rem;">🌐</div>
-          <span>Elastic IP</span>
+          <span>Static Web Hosting</span>
         </div>
         <div class="tech-item">
-          <div class="tech-logo">IAM</div>
-          <span>IAM Users & Policies</span>
+          <div class="tech-logo" style="font-size:2rem;">⏱️</div>
+          <span>S3 Versioning</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo" style="font-size:2rem;">♻️</div>
+          <span>Lifecycle Rules</span>
         </div>
         <div class="tech-item">
           <div class="tech-logo" style="font-size:2rem;">🔐</div>
-          <span>Security Groups</span>
+          <span>Bucket Policies</span>
         </div>
         <div class="tech-item">
           <div class="tech-logo">HTML</div>
@@ -200,37 +191,44 @@
         </div>
         <div class="arch-arrow">→</div>
         <div class="arch-box elastic-ip">
-          <div class="arch-icon">🔗</div>
-          <div class="arch-label">Elastic IP</div>
-          <div class="arch-sub">Static Public IP</div>
+          <div class="arch-icon">🌐</div>
+          <div class="arch-label">S3 Endpoint</div>
+          <div class="arch-sub">Website URL</div>
         </div>
         <div class="arch-arrow">→</div>
         <div class="arch-box ec2">
-          <div class="arch-icon">🖥️</div>
-          <div class="arch-label">EC2 Instance</div>
-          <div class="arch-sub">Apache2 :80</div>
+          <div class="arch-icon">🪣</div>
+          <div class="arch-label">Amazon S3 Bucket</div>
+          <div class="arch-sub">Public Access</div>
         </div>
         <div class="arch-arrow">→</div>
         <div class="arch-box website">
-          <div class="arch-icon">🌐</div>
-          <div class="arch-label">This Website</div>
-          <div class="arch-sub">/var/www/html</div>
+          <div class="arch-icon">📄</div>
+          <div class="arch-label">index.html</div>
+          <div class="arch-sub">Served Static Files</div>
         </div>
       </div>
+      
       <div class="iam-section">
-        <h3>IAM Access Control</h3>
+        <h3>Versioning & Lifecycle Workflow</h3>
         <div class="iam-grid">
-          <div class="iam-card no-access">
-            <div class="iam-icon">🚫</div>
-            <h4>IAM User 1</h4>
-            <p>No Policies Attached</p>
-            <div class="iam-badge denied">Access Denied</div>
+          <div class="iam-card has-access" style="border-color: #3b82f6;">
+            <div class="iam-icon">📝</div>
+            <h4>Active Object</h4>
+            <p>index.html (Latest Version)</p>
+            <div class="iam-badge allowed" style="background: rgba(59, 130, 246, 0.1); color: #60a5fa;">Publicly Served</div>
           </div>
-          <div class="iam-card has-access">
-            <div class="iam-icon">✅</div>
-            <h4>IAM User 2</h4>
-            <p>AmazonEC2ReadOnlyAccess</p>
-            <div class="iam-badge allowed">EC2 View Access</div>
+          <div class="iam-card" style="border-color: #8b5cf6;">
+            <div class="iam-icon">⏱️</div>
+            <h4>Noncurrent Object</h4>
+            <p>index.html (Previous Version)</p>
+            <div class="iam-badge" style="background: rgba(139, 92, 246, 0.1); color: #a78bfa;">Stored as Backup</div>
+          </div>
+          <div class="iam-card no-access">
+            <div class="iam-icon">🗑️</div>
+            <h4>Lifecycle Rule</h4>
+            <p>After 30 Days</p>
+            <div class="iam-badge denied">Permanently Deleted</div>
           </div>
         </div>
       </div>
@@ -245,14 +243,14 @@
       <div class="contact-card">
         <div class="contact-info">
           <h3>Cipher Schools — Cloud Computing</h3>
-          <p>Assignment 01 · Phase 2 · April 2026</p>
+          <p>Assignment 02 · Phase 2 · April 2026</p>
           <div class="contact-links">
             <a href="https://github.com/shubham0915/assignment2cypherschool" class="contact-link" id="github-link" target="_blank">GitHub Repository →</a>
           </div>
         </div>
         <div class="contact-badge">
           <span class="pulse-dot"></span>
-          Hosted Live on AWS
+          Hosted Live on Amazon S3
         </div>
       </div>
     </div>
@@ -261,7 +259,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>© 2026 Shubham · Cipher Schools · AWS EC2 Assignment · Built with ❤️ and HTML/CSS/JS</p>
+      <p>© 2026 Shubham · Cipher Schools · AWS S3 Assignment · Built with ❤️ and HTML/CSS/JS</p>
     </div>
   </footer>
 
